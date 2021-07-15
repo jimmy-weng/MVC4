@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebApplication1.Models.ViewModel.shopping>
+
+@{
+    ViewData["Title"] = "cart";
+}
+
+<h1>cart</h1>
+
+<p>
+    <a asp-action="Index">回首頁</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Game_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game_category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit_price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Game_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game_category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit_price)
+            </td>
+            <td>
+               <a asp-action="deletcart" asp-route-shoppingid="@item.shoppingid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

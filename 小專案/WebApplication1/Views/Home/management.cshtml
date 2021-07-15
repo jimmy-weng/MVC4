@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.ViewModel.Game_mall
+
+@{
+    ViewData["Title"] = "management";
+    int count = 0;
+}
+
+<h1>management</h1>
+<a asp-action="index">回到首頁</a>
+<form asp-action="management">
+   <input type="submit" value="更改價格">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Game_number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Game_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Game_category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit_price)
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.game)
+            {
+              
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Game_number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Game_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Game_category)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => Model.game[count].Game_number, new { htmlAttributes = new { @class = "form-control", @style = "display:none" } })
+                        @Html.EditorFor(model => Model.game[count].Unit_price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.str)
+                    </td>
+
+                </tr>
+                count++;
+            }
+        </tbody>
+    </table>
+</form>

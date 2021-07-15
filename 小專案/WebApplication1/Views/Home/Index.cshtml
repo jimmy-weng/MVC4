@@ -1,0 +1,98 @@
+﻿@model IEnumerable<WebApplication1.Models.ViewModel.Game_mall>
+@{
+    ViewData["Title"] = "Home Page";
+    string displays = "none";
+}
+
+
+<h1>遊戲購買首頁</h1>
+
+<form method="Post" asp-action="index">
+    <input name="Game_name">
+    <label>請輸入資料庫內的遊戲名稱</label><br>
+    <input type="submit">
+</form>
+@ViewBag.str
+@if (ViewBag.game != null)
+{
+    displays = "";
+    <table class="table" style="display:@displays">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Game_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Game_category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit_price)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.game)
+            {
+                <tr>
+                    <td>
+                        @item.Game_name
+                    </td>
+                    <td>
+                        @item.Game_category
+                    </td>
+                    <td>
+                        @item.Unit_price
+                    </td>
+
+
+                </tr>
+            }
+            </tbody>
+    </table>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                遊戲代號
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game_category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit_price)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game_category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit_price)
+            </td>
+
+            <td>
+                <a asp-action="cart" asp-route-Game_number="@item.Game_number">加入購物車</a>
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

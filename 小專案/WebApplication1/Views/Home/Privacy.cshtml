@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = "_Layout";
+}
+<h1>@ViewData["Title"]</h1>
+
+<input  id="search-input">
+
+<div id='test'></div>
+<div id="div1">
+    <table>
+        <tr>
+            <td>遊戲編號</td>
+            <td>遊戲名稱</td>
+            <td>遊戲種類</td>
+            <td>單價</td>
+
+        </tr>
+        <tbody id="row">
+        </tbody>
+
+    </table>
+</div>
+<div id='test'></div>
+@*<input type="text" id="search" />
+
+<div class="info">
+
+    <span>aa</span>
+
+    <span>ab</span>
+
+    <span>ac</span>
+
+</div>
+
+<div class="info">
+
+    <span>ba</span>
+
+    <span>bb</span>
+
+    <span>bc</span>
+
+</div>
+
+<div class="info">
+
+    <span>ca</span>
+
+    <span>cb</span>
+
+    <span>cc</span>
+
+</div>*@
+
+<script>
+
+
+
+   
+    //if (input!= null) {
+    //    $('#search-input').keyup(function () {
+    //        data1 = {'search': input }
+    //        req(data1)
+    //    });
+
+    //}
+    /*else {*/
+
+        $returntrue = req();
+
+        if ($returntrue) {
+
+            setInterval(function () { req(); }, 1000);  //預設10000毫秒自動重複執行cartnumber()函數
+        }
+        function req() {
+            var input = $("#search-input").val();
+          
+                if (input=="") {
+                    $.ajax({
+                        type: 'get',
+                        url: 'http://localhost:38261/Api/api/index',
+                        success: function (info) {
+                           
+
+                            total_len = info.length;
+                            $("#row").empty();
+
+                            for (i = 0; i < total_len; i++) {
+                                $("#row").append(
+
+                                    "<tr>" +
+                                    "<td>" + info[i].game_number + "</td>" +
+                                    "<td >" + info[i].game_name + "</td>" +
+                                    "<td>" + info[i].game_category + "</td>" +
+                                    "<td>" + info[i].unit_price + "</td>" +
+                                    "</tr>"
+                                );
+                            }
+
+
+                        },
+                        error: function () {
+                            console.log('请求失败~');
+                        }
+
+                    });
+                }
+                else {
+                    $('#search-input').keyup(function () {
+                        if (input!="") {
+                            var obj = { "name": $("#search-input").val() }
+                            console.log(obj)
+                            $.ajax({
+                                type: 'POST',
+                                datatype: "JSON",
+                                traditional: true,
+                                url: "http://localhost:38261/Api/api/index",
+                                contentType: 'application/json',
+                                data: JSON.stringify(obj),
+                                success: function (info) {
+                                  
+
+                                    total_len = info.length;
+                                    $("#row").empty();
+
+                                    for (i = 0; i < total_len; i++) {
+                                        $("#row").append(
+
+                                            "<tr>" +
+                                            "<td>" + info[i].game_number + "</td>" +
+                                            "<td >" + info[i].game_name + "</td>" +
+                                            "<td>" + info[i].game_category + "</td>" +
+                                            "<td>" + info[i].unit_price + "</td>" +
+                                            "</tr>"
+                                        );
+                                    }
+
+
+                                },
+                            })
+                        }
+                    })
+                }
+                return true
+            
+        }
+    /*}*/
+    //$('#search-input').keyup(function () {
+    //    var input = $("#search-input").val();
+    //    if (input!='') {
+
+    //        $('#row').css("display", "none");
+    //        $('#row').find("td:contains('" + input + "')").parent().css("display", "block");
+
+    //    }
+    //    else {
+
+    //        $('#row').css("display", "block");
+    //    }
+
+    //})
+    //$('#search').keyup(function () {
+    //    var searchword = $('#search').val();
+    //    if (searchword !== '') {
+    //        $('.info').css("display", "none");
+    //        $('.info').find(":contains('" + searchword + "')").parent().css("display", "block");
+    //    } else {
+    //        $('.info').css("display", "block");
+    //    }
+    //});
+  
+
+
+
+</script>
